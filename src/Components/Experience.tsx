@@ -53,7 +53,7 @@ const Experience = () => {
       organization: "ACM-JUIT",
       period: "2022 - 2023",
       description: "Attended various tech sessions and participate in contests",
-      impact: "Helped 20+ students with their projects in Java",
+      impact: "Collaborated with the community",
     },
   ];
 

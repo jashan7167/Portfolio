@@ -20,10 +20,12 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 50);
 
       // Get all sections
-      const sections = navItems.map(item => ({
-        id: item.id,
-        element: document.querySelector(item.href) as HTMLElement
-      })).filter(section => section.element);
+      const sections = navItems
+        .map((item) => ({
+          id: item.id,
+          element: document.querySelector(item.href) as HTMLElement,
+        }))
+        .filter((section) => section.element);
 
       // Find which section is currently in view
       const scrollPosition = window.scrollY + 100; // Offset for navbar height
