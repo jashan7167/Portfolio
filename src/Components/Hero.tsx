@@ -27,7 +27,7 @@ const Hero = () => {
         >
           <div className="relative">
             <img
-              src="public/assets/image.jpeg" // Replace with your actual photo
+              src="/assets/image.jpeg" // Replace with your actual photo
               alt="Jashanjot Singh"
               className="w-60 h-60 rounded-full object-cover border-2 border-lavender/20 shadow-xl shadow-lavender/10"
             />
