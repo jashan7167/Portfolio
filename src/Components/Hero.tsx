@@ -15,7 +15,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-base via-surface to-mantle relative overflow-hidden pt-10"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-base via-surface to-mantle relative overflow-hidden p-30"
     >
       {/* Subtle background dots for minimal texture */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_rgba(186,194,222,0.03)_1px,_transparent_0)] bg-[size:32px_32px]"></div>
