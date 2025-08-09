@@ -73,7 +73,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string, sectionId: string) => {
+  const handleNavClick = (_href: string, sectionId: string) => {
     setActiveSection(sectionId);
     setIsMobileMenuOpen(false);
 
