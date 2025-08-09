@@ -42,7 +42,7 @@ const Experience = () => {
     {
       title: "Member",
       organization: "Code Chef JUIT",
-      period: "2023 - 2024",
+      period: "2022 - 2023",
       description:
         "Attending competetive programming sessions and participated in weekly programming sessions",
       impact:
@@ -53,7 +53,8 @@ const Experience = () => {
       organization: "ACM-JUIT",
       period: "2022 - 2023",
       description: "Attended various tech sessions and participate in contests",
-      impact: "Collaborated with the community",
+      impact:
+        "Collaborated with programming and tech enthusiasts of our college who gave me vision and guidance in my tech journey.",
     },
   ];
 
@@ -82,6 +83,45 @@ const Experience = () => {
       highlight: false,
     },
   ];
+
+  // Quotes marquee (LED strip style)
+  const quotes = [
+    {
+      author: "Donald Knuth",
+      text: "Premature optimization is the root of all evil.",
+    },
+    {
+      author: "Alan Kay",
+      text: "The best way to predict the future is to invent it.",
+    },
+    {
+      author: "Edsger Dijkstra",
+      text: "Simplicity is prerequisite for reliability.",
+    },
+    { author: "Ken Thompson", text: "When in doubt, use brute force." },
+    {
+      author: "Dennis Ritchie",
+      text: "Unix is simple. It just takes a genius to understand its simplicity.",
+    },
+    {
+      author: "Stephen Hawking",
+      text: "Intelligence is the ability to adapt to change.",
+    },
+  ];
+
+  // Author brief info for tooltip
+  const authorInfo: Record<string, string> = {
+    "Donald Knuth":
+      "Computer scientist, creator of TeX, pioneer of algorithm analysis.",
+    "Alan Kay":
+      "Computer scientist, object-oriented programming pioneer (Smalltalk).",
+    "Edsger Dijkstra":
+      "Algorithm & structured programming pioneer; shortest path algorithm.",
+    "Ken Thompson": "Co-creator of Unix and the B programming language.",
+    "Dennis Ritchie": "Co-creator of C and Unix; shaped modern computing.",
+    "Stephen Hawking":
+      "Theoretical physicist known for work on black holes & cosmology.",
+  };
 
   return (
     <section id="experience" className="min-h-screen bg-base relative py-20">
@@ -271,20 +311,44 @@ const Experience = () => {
         </div>
 
         {/* Bottom accent */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-20 text-center"
-        >
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-surface/20 border border-mauve/20 rounded-full">
-            <span className="text-sm text-subtext1 font-light">
-              Building experiences, creating impact
-            </span>
-            <span className="text-lavender">🚀</span>
+
+        {/* Bottom scrolling quotes */}
+        <div className="relative mt-24 ">
+          {/* Edge fades */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 z-20 bg-gradient-to-r from-base via-base/80 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 z-20 bg-gradient-to-l from-base via-base/80 to-transparent" />
+
+          <div className="relative rounded-full border border-mauve/25 bg-surface/10 backdrop-blur-sm ">
+            <div className="overflow-hidden rounded-full pb-10 pt-10">
+              <div className="marquee-track flex gap-12 py-2 px-8">
+                {[...quotes, ...quotes].map((q, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 text-sm font-light text-subtext1 shrink-0"
+                  >
+                    <span className="px-4 py-1 rounded-full bg-mantle/40 border border-mauve/25 text-lavender shadow-[0_0_10px_-2px_rgba(203,166,247,0.45)]">
+                      “{q.text}”
+                    </span>
+
+                    {/* Author with tooltip */}
+                    <span className="relative group cursor-help text-xs text-mauve/70 shrink-0">
+                      — {q.author}
+                      <span
+                        role="tooltip"
+                        className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 w-56 -translate-x-1/2 rounded-lg border border-mauve/30 bg-base/95 px-3 py-2 text-[11px] leading-snug text-subtext1 shadow-lg shadow-base/40 backdrop-blur-md opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition duration-200"
+                      >
+                        {authorInfo[q.author]}
+                        <span className="absolute -top-1 left-1/2 -translate-x-1/2 h-2 w-2 rotate-45 bg-base/95 border-l border-t border-mauve/30" />
+                      </span>
+                    </span>
+
+                    <span className="w-2 h-2 rounded-full bg-mauve/70 shadow-[0_0_6px_2px_rgba(203,166,247,0.45)] shrink-0" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

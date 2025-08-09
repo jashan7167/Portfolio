@@ -311,7 +311,7 @@ const Contact = ({ onNotification }: ContactProps) => {
             >
               <div className="w-3 h-3 bg-green rounded-full animate-pulse"></div>
               <span className="text-sm text-subtext1 font-light">
-                Currently available for new opportunities
+                Send me something interesting
               </span>
             </motion.div>
 

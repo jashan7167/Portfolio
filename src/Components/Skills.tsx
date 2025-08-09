@@ -17,13 +17,7 @@ const Skills = () => {
     {
       title: "Backend Technologies",
       icon: "⚙️",
-      skills: [
-        "Spring Boot",
-        "Node.js",
-        "RESTful APIs",
-        "Microservices",
-        "GraphQL",
-      ],
+      skills: ["Spring Boot", "RESTful APIs", "Microservices", "GraphQL"],
     },
     {
       title: "Databases",
@@ -33,12 +27,12 @@ const Skills = () => {
     {
       title: "Cloud & DevOps",
       icon: "☁️",
-      skills: ["AWS", "Docker", "Kubernetes", "CI/CD", "Linux"],
+      skills: ["AWS", "Docker", "CI/CD", "Linux"],
     },
     {
       title: "Tools & Frameworks",
       icon: "🛠️",
-      skills: ["Git", "Maven/Gradle", "JUnit", "Hibernate/JPA", "Apache Kafka"],
+      skills: ["Git", "Maven", "JUnit", "Hibernate/JPA", "Apache Kafka"],
     },
   ];
 
@@ -139,6 +133,20 @@ const Skills = () => {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-20 text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-surface/20 border border-mauve/20 rounded-full">
+            <span className="text-sm text-subtext1 font-light">
+              Intelligence is the ability to adapt to change - Stephen Hawking
+            </span>
+            <span className="text-lavender"></span>
+          </div>
         </motion.div>
       </div>
     </section>

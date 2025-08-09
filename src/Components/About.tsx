@@ -200,7 +200,7 @@ const About = () => {
         >
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-base/30 border border-lavender/20 rounded-full">
             <span className="text-sm text-subtext1 font-light">
-              Always learning, always building
+              Paths are made by walking. - Franz Kafka
             </span>
             <span className="text-mauve">✨</span>
           </div>

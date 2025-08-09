@@ -46,3 +46,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+@keyframes marquee-linear {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  width: max-content;
+  animation: marquee-linear 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes sweep {
+  0% { transform: translateX(-30%); }
+  100% { transform: translateX(130%); }
+}
+.animate-gradient-text {
+  background-size: 200% 100%;
+  animation: gradient-shift 6s linear infinite;
+}
+.animate-sweep {
+  animation: sweep 1.2s cubic-bezier(.55,.2,.35,.9) infinite;
+}

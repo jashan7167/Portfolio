@@ -9,42 +9,31 @@ const Projects = () => {
       id: 1,
       title: "E-Pharmacy Platform",
       description:
-        "Full-stack e-pharmacy platform with user authentication, store management, and comprehensive product handling.",
-      longDescription:
-        "Comprehensive e-pharmacy platform built with Spring Boot and React. Features secure JWT-based user authentication, intuitive interface for enhanced user experience, store and product management capabilities, and end-to-end workflow for seamless platform operation.",
+        "Full-stack e-pharmacy platform with auth & product management.",
       technologies: ["Spring Boot", "SQL", "React", "Vite", "JWT", "Java"],
-      category: "full-stack",
-      image: "/api/placeholder/600/400",
-      demoUrl: "#",
-      githubUrl: "#",
+      category: "full-stack,web",
+      image: "public/assets/epharmacy.png",
+      githubUrl: "https://github.com/jashan7167/E-Pharmacy",
     },
     {
       id: 2,
       title: "Sign Language Detection System",
-      description:
-        "AI-powered sign language detection system using deep learning and computer vision for accessibility.",
-      longDescription:
-        "Innovative sign language detection system utilizing Deep Learning with CNN architecture and Python. Features user-friendly Tkinter interface for easy interaction, sophisticated dataset creation using Mediapipe Library for American Sign Language (ASL), and successful gesture recognition capabilities to create words and sentences.",
+      description: "AI sign language detection using CNN & Mediapipe.",
       technologies: [
         "Python",
-        "Deep Learning",
         "CNN",
         "Tkinter",
         "Mediapipe",
         "Computer Vision",
       ],
       category: "ai-ml",
-      image: "/api/placeholder/600/400",
-      demoUrl: "#",
-      githubUrl: "#",
+      image: "public/assets/signlanguage.png",
+      githubUrl: "https://github.com/jashan7167/SignLanguageDetection",
     },
     {
       id: 3,
       title: "Minimal Room Chat Application",
-      description:
-        "Real-time chat application with minimal design, allowing users to create topic-based rooms for communication.",
-      longDescription:
-        "Simple yet effective real-time chat application with minimal and easy-to-use interface. Built with Spring Boot backend and React frontend, featuring room creation functionality on specific topics and seamless real-time communication using SockJs for WebSocket integration.",
+      description: "Real-time topic-based room chat with WebSockets.",
       technologies: [
         "Spring Boot",
         "SockJs",
@@ -54,28 +43,8 @@ const Projects = () => {
         "Java",
       ],
       category: "full-stack",
-      image: "/api/placeholder/600/400",
-      demoUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      id: 4,
-      title: "Portfolio Website",
-      description:
-        "Personal portfolio website built with modern React and Tailwind CSS featuring clean design and smooth animations.",
-      longDescription:
-        "Modern portfolio website showcasing my work and skills. Built with React, TypeScript, and Tailwind CSS with Framer Motion animations. Features a clean Catppuccin color scheme and responsive design optimized for all devices.",
-      technologies: [
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "Framer Motion",
-        "Vite",
-      ],
-      category: "web",
-      image: "/api/placeholder/600/400",
-      demoUrl: "#",
-      githubUrl: "#",
+      image: "public/assets/chatting.png",
+      githubUrl: "https://github.com/jashan7167/Springboot-roomchat",
     },
   ];
 
@@ -161,19 +130,30 @@ const Projects = () => {
         {/* All Projects Grid */}
         <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project, index) => (
-            <motion.div
+            <motion.a
               key={project.id}
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               layout
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ delay: index * 0.1, duration: 0.4 }}
               whileHover={{ y: -4, scale: 1.02 }}
-              className="bg-base/20 backdrop-blur-sm border border-surface1/30 rounded-2xl overflow-hidden hover:border-blue/20 transition-all duration-300 group"
+              whileTap={{ scale: 0.98 }}
+              aria-label={`Open ${project.title} repository on GitHub`}
+              className="bg-base/20 backdrop-blur-sm border border-surface1/30 rounded-2xl overflow-hidden hover:border-blue/20 transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/40 cursor-pointer block"
             >
               {/* Project Image */}
-              <div className="aspect-video bg-surface/20 border-b border-surface1/20 flex items-center justify-center">
-                <span className="text-3xl text-subtext0">🖼️</span>
+              <div className="relative aspect-video bg-surface/20 border-b border-surface1/20 overflow-hidden">
+                <img
+                  src={project.image.replace(/^public\//, "/")}
+                  alt={project.title}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-t from-base/70 via-base/10 to-transparent transition"></div>
               </div>
 
               {/* Project Content */}
@@ -182,26 +162,9 @@ const Projects = () => {
                   <h4 className="font-display font-medium text-lavender group-hover:text-blue transition-colors">
                     {project.title}
                   </h4>
-                  <div className="flex gap-2 ml-2">
-                    <motion.a
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      href={project.demoUrl}
-                      className="w-6 h-6 bg-blue/10 border border-blue/20 rounded text-xs flex items-center justify-center text-blue hover:bg-blue/20 transition-colors"
-                      title="Live Demo"
-                    >
-                      🔗
-                    </motion.a>
-                    <motion.a
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      href={project.githubUrl}
-                      className="w-6 h-6 bg-green/10 border border-green/20 rounded text-xs flex items-center justify-center text-green hover:bg-green/20 transition-colors"
-                      title="GitHub"
-                    >
-                      📁
-                    </motion.a>
-                  </div>
+                  <span className="text-[10px] px-2 py-1 rounded-md bg-blue/10 border border-blue/20 text-blue opacity-0 group-hover:opacity-100 transition">
+                    GitHub →
+                  </span>
                 </div>
 
                 <p className="text-subtext1 text-sm mb-4 leading-relaxed">
@@ -224,7 +187,7 @@ const Projects = () => {
                   )}
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </motion.div>
 
@@ -252,7 +215,7 @@ const Projects = () => {
               fill="currentColor"
               viewBox="0 0 24 24"
             >
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.06-.73.08-.729.08-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
             </svg>
           </motion.a>
         </motion.div>
