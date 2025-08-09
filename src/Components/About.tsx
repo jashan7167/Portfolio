@@ -46,6 +46,28 @@ const About = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_rgba(186,194,222,0.02)_1px,_transparent_0)] bg-[size:40px_40px]"></div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Move the heading section outside and center it */}
+        <div className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-4xl font-display font-light text-lavender"
+          >
+            About Me
+          </motion.h2>
+          <div className="flex justify-center mt-4">
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "3rem" }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              viewport={{ once: true }}
+              className="h-1 bg-gradient-to-r from-lavender to-mauve rounded-full"
+            />
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left side - Text content */}
           <motion.div
@@ -55,25 +77,7 @@ const About = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            {/* Section header */}
-            <div className="space-y-4">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="text-4xl font-display font-light text-lavender"
-              >
-                About Me
-              </motion.h2>
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: "3rem" }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="h-1 bg-gradient-to-r from-lavender to-mauve rounded-full"
-              />
-            </div>
+            {/* Remove the section header div that was here */}
 
             {/* Main description */}
             <motion.div

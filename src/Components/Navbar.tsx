@@ -7,6 +7,8 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 });
   const navRef = useRef<HTMLDivElement>(null);
+  const navBarRef = useRef<HTMLDivElement>(null); // NEW ref for whole navbar
+  const [navHeight, setNavHeight] = useState(0); // NEW state
 
   const navItems = [
     { name: "Home", href: "#home", id: "home" },
@@ -87,20 +89,33 @@ const Navbar = () => {
     }
   };
 
+  // measure navbar height (on mount, resize, scroll changes)
+  useEffect(() => {
+    const measure = () => {
+      if (navBarRef.current) setNavHeight(navBarRef.current.offsetHeight);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    window.addEventListener("orientationchange", measure);
+    return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("orientationchange", measure);
+    };
+  }, []);
+
   return (
     <>
       <motion.nav
+        ref={navBarRef} // attach ref here
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className={`
-          fixed top-0 left-0 right-0 z-50 transition-all duration-300 will-change-transform
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 will-change-transform
           ${
             isScrolled
               ? "bg-base/95 backdrop-blur-md border-b border-surface/30 shadow-lg shadow-base/20"
               : "bg-base/90 backdrop-blur-sm"
-          }
-        `}
+          }`}
       >
         <div className="max-w-7.5xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-15">
@@ -196,23 +211,31 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop (starts below navbar so it doesn't look detached) */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-base/80 backdrop-blur-sm z-40 md:hidden"
+              className="fixed left-0 right-0 md:hidden bg-base/80 backdrop-blur-sm z-40"
+              style={{
+                top: navHeight, // starts exactly under navbar
+                height: `calc(100vh - ${navHeight}px)`,
+              }}
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
-            {/* Menu panel */}
+            {/* Side panel */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
-              className="fixed top-20 right-0 w-72 h-[calc(100vh-5rem)] bg-base/95 backdrop-blur-md border-l border-surface/30 z-50 md:hidden"
+              className="fixed right-0 w-72 md:hidden bg-base/95 backdrop-blur-md border-l border-surface/30 z-50"
+              style={{
+                top: navHeight,
+                height: `calc(100vh - ${navHeight}px)`,
+              }}
             >
               <div className="p-6 space-y-3 relative">
                 {navItems.map((item, index) => (
@@ -222,14 +245,12 @@ const Navbar = () => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05, duration: 0.2 }}
-                    className={`
-                      w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 relative overflow-hidden
+                    className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-200
                       ${
                         activeSection === item.id
                           ? "text-lavender bg-surface/10 border-l-2 border-lavender"
                           : "text-subtext1 hover:text-text hover:bg-surface/10"
-                      }
-                    `}
+                      }`}
                   >
                     {item.name}
                   </motion.button>
